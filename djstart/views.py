@@ -8,16 +8,16 @@ class DjstartView(TemplateView):
     def __init__(self):
         self.params = {
             'title': "djstart/index",
-            'message':'your data:',
-            'form':DjstartForm()
+            'form':DjstartForm(),
+            'result':None,
         }
 
     def get(self,request):
         return render(request,'djstart/index.html',self.params)
 
     def post(self,request):
-        msg = 'あなたは、<b>'+ request.POST['name'] + '('+request.POST['age'] + ')さんです。<br>メールアドレスは、<b>' + request.POST['mail'] + '</b>ですね。'
-        self.params['message']= msg
+        chk = request.POST['check']
+        self.params['result'] = 'You selected:"' + chk + '".'
         self.params['form'] = DjstartForm(request.POST)
         return render(request,'djstart/index.html',self.params)
 
