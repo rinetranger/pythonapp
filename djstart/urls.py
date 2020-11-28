@@ -6,13 +6,11 @@ Created on Fri Nov 27 15:24:43 2020
 @author: rinkishi
 """
 
-from django.urls import path
-from . import views
+from django.conf.urls import url
+from . views import DjstartView
 
 
 
 urlpatterns = [
-        path('',views.index,name='index'),
-        # path('next',views.next,name='next'),
-        # path('form',views.form,name="form"),
+        url(r'',DjstartView.as_view(),name='index')
 ]
