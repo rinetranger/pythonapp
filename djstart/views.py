@@ -14,10 +14,10 @@ class DjstartView(TemplateView):
 
     def get(self,request):
         return render(request,'djstart/index.html',self.params)
-
+    
     def post(self,request):
-        chk = request.POST['check']
-        self.params['result'] = 'You selected:"' + chk + '".'
+        ch = request.POST['choice']
+        self.params['result'] = 'you selected:"' + ch + '".'
         self.params['form'] = DjstartForm(request.POST)
         return render(request,'djstart/index.html',self.params)
 
