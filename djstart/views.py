@@ -1,26 +1,18 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import TemplateView
-from . forms import DjstartForm
+from . models import Friend
 
-class DjstartView(TemplateView):
+def index(request):
+    data = Friend.objects.all()
+    params ={
+        'title':'djstatr',
+        'message':'all friends.',
+        'data':data,
+    }
 
-    def __init__(self):
-        self.params = {
-            'title': "djstart/index",
-            'form':DjstartForm(),
-            'result':None,
-        }
+    return render(request,'djstart/index.html',params) 
 
-    def get(self,request):
-        return render(request,'djstart/index.html',self.params)
     
-    def post(self,request):
-        ch = request.POST['choice']
-        self.params['result'] = 'you selected:"' + ch + '".'
-        self.params['form'] = DjstartForm(request.POST)
-        return render(request,'djstart/index.html',self.params)
-
 
 
 # Create your views here.
